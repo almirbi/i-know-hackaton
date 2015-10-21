@@ -3,7 +3,11 @@
   "manifest_version": 2,
   "version": "0.1",
   "description": "A Google Chrome extension for triggering a EEXCESS search after the user performs a Google search.",
-  "background": "background.html",
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ]
+  },
   "content_scripts": [ {
     "js": ["bower_components/requirejs/require.js","js/requireContent.js","js/common.js","js/content.js"],
     "matches": [ "https://www.google.at/*"],

@@ -8,7 +8,7 @@ function getParameterByName(name) {
 }
 
 function forwardResponseToPopup(response) {
-    console.log(response.data.result);
+    chrome.runtime.sendMessage({greeting: response.data.result});
 }
 
 require(['c4/APIconnector'], function(api) {
