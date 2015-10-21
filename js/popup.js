@@ -10,4 +10,5 @@ var dummy = {
 var iframe = document.getElementById('search-results');
 iframe.onload = function (e) {
 	iframe.contentWindow.postMessage({event: 'eexcess.newResults', data: dummy}, '*');
+	chrome.browserAction.setBadgeText({text: ""});
 }
