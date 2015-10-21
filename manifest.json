@@ -15,14 +15,13 @@
     "bower_components/*"
   ],
   "icons": {
-    "48": "icon48.png",
-    "128": "icon128.png"
+    "16": "icons/16.png",
+    "19": "icons/19.png",
+    "38": "icons/48.png",
+    "48": "icons/48.png",
+    "128": "icons/128.png"
   },
   "browser_action": {
-    "default_icon": {                    // optional
-      "19": "icon48.png",           // optional
-      "38": "icon48.png"            // optional
-    },
     "default_title": "Check EEXCESS Results",      // optional; shown in tooltip
     "default_popup": "popup.html"        // optional
   }
