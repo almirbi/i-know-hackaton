@@ -6,7 +6,7 @@
   "background": "background.html",
   "content_scripts": [ {
     "js": [ "background.js" ],
-    "matches": [ "https://www.google.com/*"],
+    "matches": [ "https://www.google.at/*"],
     "css" : [ "style.css" ]
   }],
   "web_accessible_resources": [
