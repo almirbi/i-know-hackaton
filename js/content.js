@@ -1,3 +1,10 @@
+function getParameterByName(name) {
+    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+        results = regex.exec(location.search);
+    return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+}
+
 
 require(['c4/APIconnector'], function(api) {
     api.init({
@@ -8,21 +15,40 @@ require(['c4/APIconnector'], function(api) {
         }
     });
 
-    function getParameterByName(name) {
-        name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-        var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
-            results = regex.exec(location.search);
-        return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
-    }
-
     var input = document.querySelector('input#lst-ib');
 
     input.addEventListener('input', function()
     {
-        console.log(input.value);
+        var profile = {
+            contextKeywords:[{
+                text: input.value
+            }],
+            origin: {
+                module: "Google Search"
+            }
+        };
+        api.query(profile, function(response) {
+            if(response.status === 'success') {
+                console.log(response.data.result);
+            } else {
+                console.log(':\'(');
+            }
+        });
     });
 
-    console.log(getParameterByName('q'));
-
-
+    var profile = {
+        contextKeywords:[{
+            text: getParameterByName('q')
+        }],
+        origin: {
+            module: "Google Search"
+        }
+    };
+    api.query(profile, function(response) {
+        if(response.status === 'success') {
+            console.log(response.data.result);
+        } else {
+            console.log(':\'(');
+        }
+    });
 });
