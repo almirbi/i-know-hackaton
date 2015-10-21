@@ -1,0 +1,36 @@
+{
+  "name": "peas",
+  "authors": [
+    "EEXCESS INSA"
+  ],
+  "description": "Description of PEAS",
+  "moduleType": [
+    "amd",
+    "globals"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "bower_components"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.4",
+    "requirejs": "~2.1.17",
+    "graph": "https://github.com/tantalor/graphjs.git"
+  },
+  "devDependencies": {
+    "jquery": "~2.1.4",
+    "requirejs": "~2.1.17",
+    "graph": "https://github.com/tantalor/graphjs.git"
+  },
+  "homepage": "https://github.com/EEXCESS/peas",
+  "_release": "bf8f8a314e",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "bf8f8a314ebcb1fcdf4f8c5dd7edc2c8a9d51469"
+  },
+  "_source": "https://github.com/EEXCESS/peas.git",
+  "_target": "*",
+  "_originalSource": "https://github.com/EEXCESS/peas.git"
+}

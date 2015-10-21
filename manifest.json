@@ -5,15 +5,25 @@
   "description": "A Google Chrome extension for triggering a EEXCESS search after the user performs a Google search.",
   "background": "background.html",
   "content_scripts": [ {
-    "js": [ "background.js" ],
+    "js": ["bower_components/requirejs/require.js","js/requireContent.js","js/common.js","js/content.js"],
     "matches": [ "https://www.google.at/*"],
     "css" : [ "style.css" ]
   }],
   "web_accessible_resources": [
-    "*.png", "*.gif"
+    "*.png",
+    "*.gif",
+    "bower_components/*"
   ],
   "icons": {
     "48": "icon48.png",
     "128": "icon128.png"
+  },
+  "browser_action": {
+    "default_icon": {                    // optional
+      "19": "icon48.png",           // optional
+      "38": "icon48.png"            // optional
+    },
+    "default_title": "Check EEXCESS Results",      // optional; shown in tooltip
+    "default_popup": "popup.html"        // optional
   }
 }
