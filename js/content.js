@@ -1,3 +1,5 @@
+var input = document.querySelector('input#lst-ib');
+
 function getParameterByName(name) {
     name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
     var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
@@ -5,50 +7,42 @@ function getParameterByName(name) {
     return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
 }
 
+function forwardResponseToPopup(response) {
+    console.log(response.data.result);
+}
 
 require(['c4/APIconnector'], function(api) {
-    api.init({
-        origin:{
-            clientType:"some client", // the name of the client application
-            clientVersion:"42.23", // the version nr of the client application
-            userID:"E993A29B-A063-426D-896E-131F85193EB7" // UUID of the current user
-        }
-    });
-
-    var input = document.querySelector('input#lst-ib');
-
-    input.addEventListener('input', function()
-    {
+    function searchEexcess(keyword, callback) {
         var profile = {
             contextKeywords:[{
-                text: input.value
+                text: keyword
             }],
             origin: {
-                module: "Google Search"
+                module: "Google Search Trigger"
             }
         };
+
         api.query(profile, function(response) {
             if(response.status === 'success') {
-                console.log(response.data.result);
+                callback(response);
             } else {
                 console.log(':\'(');
             }
         });
+    }
+
+    api.init({
+        origin:{
+            clientType:"Google Search Trigger", // the name of the client application
+            clientVersion:"0.1", // the version nr of the client application
+            userID:"E993A29B-A063-426D-896E-131F85193EB7" // UUID of the current user
+        }
     });
 
-    var profile = {
-        contextKeywords:[{
-            text: getParameterByName('q')
-        }],
-        origin: {
-            module: "Google Search"
-        }
-    };
-    api.query(profile, function(response) {
-        if(response.status === 'success') {
-            console.log(response.data.result);
-        } else {
-            console.log(':\'(');
-        }
+    input.addEventListener('input', function()
+    {
+        searchEexcess(input.value, forwardResponseToPopup);
     });
+
+    searchEexcess(getParameterByName('q'), forwardResponseToPopup);
 });
