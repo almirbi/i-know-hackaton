@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+<head>
+    <title>EEXCESS</title>
+    <link href="options.css" rel="stylesheet" type="text/css">
+    <link href="bower_components/jquery-ui/themes/dark-hive/jquery-ui.min.css" rel="stylesheet" type="text/css">
+    <link href="bower_components/jquery-ui/themes/dark-hive/theme.css" rel="stylesheet" type="text/css">
+
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/jquery-ui/jquery-ui.min.js"></script>
+    <script src="js/options.js"></script>
+</head>
+<body>
+<h1>
+    <img src="icons/48.png" alt="EEXCESS">
+    EEXCESS Google Trigger Options Page
+</h1>
+<h2>Options</h2>
+<form id="options">
+    <h3>General settings</h3>
+    Active?
+    <input type="checkbox" name="isActivated" checked>
+    <br>
+    Toolbar on?
+    <input type="checkbox" name="toolbarOn" checked>
+    <br>
+    API key:
+    <input type="text" id="api-key" name="apiKey">
+    <br>
+    <div class="slider-container">
+        <div class="label">Start notifying with desktop notifications after a partner reached</div>
+        <div class="slider"><div id="notifications-minimum-slider"></div></div>
+        <strong><input name="notificationsMinimum" type="number" id="notifications-minimum-value">%</strong> daily limit.
+    </div>
+
+    <div class="slider-container">
+        <div class="label">Show in toolbar after partner reached</div>
+        <div class="slider"><div id="toolbar-minimum-slider"></div></div>
+        <strong><input name="toolbarMinimum" type="number" id="toolbar-minimum-value">%</strong> daily limit.
+    </div>
+
+</form>
+</body>
+</html>

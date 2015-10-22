@@ -6,7 +6,7 @@ function getParameterByName(name) {
         results = regex.exec(location.search);
     return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
 }
-
+console.log('HI');
 function forwardResponseToPopup(response) {
     chrome.runtime.sendMessage({result: response.data.result});
 }
