@@ -45,7 +45,7 @@ require(['c4/APIconnector'], function(api) {
             origin:{
                 clientType:"Google Search Trigger", // the name of the client application
                 clientVersion:"0.9", // the version nr of the client application
-                userID:response.apiKey // UUID of the current user
+                userID:"E993A29B-A063-426D-896E-131F85193EB7" // UUID of the current user
             }
         });
     });
