@@ -10,7 +10,10 @@
   },
   "content_scripts": [ {
     "js": ["bower_components/requirejs/require.js","js/requireContent.js","js/common.js","js/content.js"],
-    "matches": [ "https://www.google.at/*"]
+     "matches": [ "*://*/*" ],
+        "include_globs": [
+            "*://*.google.*/*"
+        ]
   }],
   "web_accessible_resources": [
     "*.png",
