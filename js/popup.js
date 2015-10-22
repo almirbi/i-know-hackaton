@@ -9,13 +9,7 @@ if (data && data[latestKeyword]) {
 	}
 
 	var iframe = document.getElementById('search-results');
-	iframe.onload = function (e) {
-		iframe.contentWindow.postMessage({event: 'eexcess.newResults', data: dummy}, '*');
-		chrome.browserAction.setBadgeText({text: ""});
 
-		var searchQuery = document.getElementById('search-query');
-		searchQuery.innerHTML = data[latestKeyword].response.data.profile.contextKeywords[0].text;
-	}
 
 	var searchHistory = document.getElementById('history');
 
@@ -35,6 +29,18 @@ if (data && data[latestKeyword]) {
 			});
 		}
 	}
+
+	iframe.onload = function (e) {
+		setTimeout(function() {
+			iframe.contentWindow.postMessage({event: 'eexcess.newResults', data: dummy}, '*');
+			chrome.browserAction.setBadgeText({text: ""});
+
+			var searchQuery = document.getElementById('search-query');
+			searchQuery.innerHTML = data[latestKeyword].response.data.profile.contextKeywords[0].text;
+
+		}, 1000);
+	}
+
 } else {
 	var html = document.getElementsByTagName("html")[0];
 	var body = document.getElementsByTagName("body")[0];

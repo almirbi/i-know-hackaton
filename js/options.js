@@ -20,7 +20,7 @@ $(function() {
 });
 
 function ghost(isDeactivated) {
-    options.style.color = isDeactivated ? 'graytext' : 'black';
+    //options.style.color = isDeactivated ? 'graytext' : 'black';
     // The label color.
 
 }

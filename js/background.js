@@ -16,7 +16,12 @@ if (!localStorage.isInitialized) {
     localStorage.isInitialized = true; // The option initialization.
 }
 
-
+function show(message) {
+    new Notification('EEXCESS', {
+        icon: 'icons/48.png',
+        body: message
+    });
+}
 
 chrome.runtime.onMessage.addListener(
     function(request, sender, sendResponse) {
@@ -32,7 +37,7 @@ chrome.runtime.onMessage.addListener(
         if (searchResultsString) {
             searchHistory = JSON.parse(searchResultsString);
         }
-
+        if (JSON.parse(localStorage.isActivated)) show('Results found for ' + keyword + ' on EEXCESS.');
         searchHistory[keyword.trim()] = request;
         localStorage.setItem("search-results", JSON.stringify(searchHistory));
         localStorage.setItem("search-results-last", keyword);
@@ -54,7 +59,7 @@ chrome.runtime.onMessage.addListener(
 
         chrome.browserAction.setBadgeBackgroundColor({color: '#E10000'});
         chrome.browserAction.setBadgeText({text: searchHistory[keyword].response.data.result.length + ""});
-
+        if (JSON.parse(localStorage.isActivated)) show('Results found for ' + keyword + ' on EEXCESS.');
         localStorage.setItem("search-results-last", keyword);
     });
 
