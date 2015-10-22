@@ -39,15 +39,17 @@ function checkSources() {
 	
 	var providers = [];
     
-    if (options.sources_europeana.checked) providers.push({name: "Europeana"});
+    if (options.sources_europeana.checked) providers.push("Europeana");
     
-    if (options.sources_mendeley.checked) providers.push({name: "Mendeley"});
+    if (options.sources_mendeley.checked) providers.push("Mendeley");
     
-    if (options.sources_zbw.checked) providers.push({name: "ZBW"});
+    if (options.sources_zbw.checked) providers.push("ZBW");
     
-    if (options.sources_kimcollect.checked) providers.push({name: "KIMPortal"});
+    if (options.sources_kimcollect.checked) providers.push("KIMPortal");
     
-    if (options.sources_wissenmedia.checked) providers.push({name: "Wissenmedia"});
+    if (options.sources_wissenmedia.checked) providers.push("Wissenmedia");
+    
+    console.log(providers);
     
     localStorage.sources = JSON.stringify(providers);
     
@@ -107,9 +109,9 @@ window.addEventListener('load', function() {
     	options.sources_wissenmedia.checked = true;
     }
     
-    options.sources_europeana.onchange = checkSources();
-    options.sources_mendeley.onchange = checkSources();
-    options.sources_zbw.onchange = checkSources();
-    options.sources_kimcollect.onchange = checkSources();
-    options.sources_wissenmedia.onchange = checkSources();
+    options.sources_europeana.onchange = checkSources;
+    options.sources_mendeley.onchange = checkSources;
+    options.sources_zbw.onchange = checkSources;
+    options.sources_kimcollect.onchange = checkSources;
+    options.sources_wissenmedia.onchange = checkSources;
 });
