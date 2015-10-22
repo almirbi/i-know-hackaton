@@ -4,11 +4,32 @@
     <meta charset="UTF-8">
     <title></title>
     <style>
-        html, body, iframe {
-            height: 520px;
+        html, body {
+            height: 610px;
             width: 675px;
         }
-
+        p {
+            text-align: center;
+            font-weight: bold;
+        }
+        #clear-history {
+            float: right;
+            width: 80px;
+            height: 30px;
+            margin-top: -24px;
+            margin-right: 20px;
+            background-color: #ff0000;
+            color: white;
+            border: none;
+        }
+        iframe {
+            height: 510px;
+            width: 675px;
+        }
+        #history {
+            max-width: 400px;
+            margin-top: 14px;
+        }
         #search-results {
              position: relative;
              min-width: 300px;
@@ -32,7 +53,7 @@
 	<iframe src="lib/eexcess_widgets/SearchResultListVis/index.html"
 		 id="search-results"></iframe>
     <div id="history"></div>
-    <button id="clear-history">Clear history</button>
+    <button id="clear-history">Clear all</button>
     <script src="js/popup.js"></script>
 
 </body>

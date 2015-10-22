@@ -74,3 +74,15 @@ chrome.runtime.onMessage.addListener(
 
 
     });
+
+chrome.runtime.onMessage.addListener(
+    function(request, sender, sendResponse) {
+        if (!request.options) return;
+
+        sendResponse({
+            apiKey: localStorage.apiKey,
+            maxResults: localStorage.maxResults
+        });
+
+
+    });
