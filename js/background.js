@@ -1,7 +1,56 @@
 chrome.runtime.onMessage.addListener(
     function(request, sender, sendResponse) {
-        chrome.browserAction.setBadgeBackgroundColor({color:'#E10000'});
-        chrome.browserAction.setBadgeText({text: request.result.length + ""});
-        localStorage.setItem("search-results", JSON.stringify(request.result));
+        if (!request.response) return;
+        chrome.browserAction.setBadgeBackgroundColor({color: '#E10000'});
+        chrome.browserAction.setBadgeText({text: request.response.data.result.length + ""});
+
+        var keyword = request.response.data.profile.contextKeywords[0].text;
+
+        var searchResultsString = localStorage.getItem("search-results");
+        var searchHistory = {};
+
+        if (searchResultsString) {
+            searchHistory = JSON.parse(searchResultsString);
+        }
+
+        searchHistory[keyword.trim()] = request;
+        localStorage.setItem("search-results", JSON.stringify(searchHistory));
+        localStorage.setItem("search-results-last", keyword);
     });
 
+chrome.runtime.onMessage.addListener(
+    function(request, sender, sendResponse) {
+        if (!request.cached) return;
+
+        var keyword = request.cached;
+
+
+        var searchResultsString = localStorage.getItem("search-results");
+        var searchHistory = {};
+
+        if (searchResultsString) {
+            searchHistory = JSON.parse(searchResultsString);
+        }
+
+        chrome.browserAction.setBadgeBackgroundColor({color: '#E10000'});
+        chrome.browserAction.setBadgeText({text: searchHistory[keyword].response.data.result.length + ""});
+
+        localStorage.setItem("search-results-last", keyword);
+    });
+
+chrome.runtime.onMessage.addListener(
+    function(request, sender, sendResponse) {
+        if (!request.greeting) return;
+
+        var searchResultsString = localStorage.getItem("search-results");
+        var searchHistory = {};
+
+        if (searchResultsString) {
+            searchHistory = JSON.parse(searchResultsString);
+            sendResponse({farewell: searchHistory[request.greeting]});
+        } else {
+            sendResponse({farewell: false});
+        }
+
+
+    });

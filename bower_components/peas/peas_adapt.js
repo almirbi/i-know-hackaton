@@ -3,7 +3,7 @@
  */
 define([], function () {
 
-	// XXX Browsing history? Location? 
+	// XXX Browsing searchHistory? Location?
 	
 	//************
 	//** Module **

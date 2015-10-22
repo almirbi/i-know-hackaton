@@ -1,7 +1,7 @@
 {
   "name": "EEXCESS Google Search Trigger",
   "manifest_version": 2,
-  "version": "0.1",
+  "version": "0.9",
   "description": "A Google Chrome extension for triggering a EEXCESS search after the user performs a Google search.",
   "background": {
     "scripts": [

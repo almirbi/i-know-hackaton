@@ -9,33 +9,42 @@ function getParameterByName(name) {
 }
 console.log('HI');
 function forwardResponseToPopup(response) {
-    chrome.runtime.sendMessage({result: response.data.result});
+    chrome.runtime.sendMessage({response: response});
 }
 
 require(['c4/APIconnector'], function(api) {
     function searchEexcess(keyword, callback) {
-        var profile = {
-            contextKeywords:[{
-                text: keyword
-            }],
-            origin: {
-                module: "Google Search Trigger"
-            }
-        };
-
-        api.query(profile, function(response) {
-            if(response.status === 'success') {
-                callback(response);
+        chrome.runtime.sendMessage({greeting: keyword}, function(response) {
+            if (response.farewell) {
+                chrome.runtime.sendMessage({cached: keyword});
             } else {
-                console.log(':\'(');
+                var profile = {
+                    contextKeywords:[{
+                        text: keyword
+                    }],
+                    origin: {
+                        module: "Google Search Trigger"
+                    }
+                };
+
+                api.query(profile, function(response) {
+                    if(response.status === 'success') {
+                        callback(response);
+                    } else {
+                        console.log(':\'(');
+                    }
+                });
             }
+
+
         });
+
     }
 
     api.init({
         origin:{
             clientType:"Google Search Trigger", // the name of the client application
-            clientVersion:"0.1", // the version nr of the client application
+            clientVersion:"0.9", // the version nr of the client application
             userID:"E993A29B-A063-426D-896E-131F85193EB7" // UUID of the current user
         }
     });
