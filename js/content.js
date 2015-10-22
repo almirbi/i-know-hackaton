@@ -1,4 +1,5 @@
 var input = document.querySelector('input#lst-ib');
+var timer = null;
 
 function getParameterByName(name) {
     name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
@@ -41,7 +42,10 @@ require(['c4/APIconnector'], function(api) {
 
     input.addEventListener('input', function()
     {
-        searchEexcess(input.value, forwardResponseToPopup);
+        clearTimeout(timer);
+        timer = setTimeout(function() {
+                searchEexcess(input.value, forwardResponseToPopup);
+            }, 2500);
     });
 
     searchEexcess(getParameterByName('q'), forwardResponseToPopup);
