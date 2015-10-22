@@ -1,3 +1,23 @@
+if (!localStorage.isInitialized) {
+    localStorage.isActivated = true;   // The display activation.
+    localStorage.apiKey = " ";
+    localStorage.maxResults = 90;
+    localStorage.searchHistory = 3;
+
+    var providers = [
+                       "Europeana",
+                       "Mendeley",
+                       "ZBW",
+                       "KIMPortal",
+                       "Wissenmedia"
+                   ];
+    
+    localStorage.sources = JSON.stringify(providers);
+    localStorage.isInitialized = true; // The option initialization.
+}
+
+
+
 chrome.runtime.onMessage.addListener(
     function(request, sender, sendResponse) {
         if (!request.response) return;

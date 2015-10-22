@@ -21,24 +21,38 @@
     Active?
     <input type="checkbox" name="isActivated" checked>
     <br>
-    Toolbar on?
-    <input type="checkbox" name="toolbarOn" checked>
-    <br>
     API key:
     <input type="text" id="api-key" name="apiKey">
     <br>
     <div class="slider-container">
-        <div class="label">Start notifying with desktop notifications after a partner reached</div>
-        <div class="slider"><div id="notifications-minimum-slider"></div></div>
-        <strong><input name="notificationsMinimum" type="number" id="notifications-minimum-value">%</strong> daily limit.
+        <div class="label">Maximal number of Results</div>
+        <div class="slider"><div id="results-maximum-slider"></div></div>
+        <input name="maxResults" type="number" id="results-maximum-value">
     </div>
 
     <div class="slider-container">
-        <div class="label">Show in toolbar after partner reached</div>
-        <div class="slider"><div id="toolbar-minimum-slider"></div></div>
-        <strong><input name="toolbarMinimum" type="number" id="toolbar-minimum-value">%</strong> daily limit.
+        <div class="label">Keep previous search results</div>
+        <div class="slider"><div id="search-history-slider"></div></div>
+        <input name="searchHistory" type="number" id="search-history-value">
     </div>
-
+    <br>
+    <strong>Sources</strong>
+    <br>
+    <input type="checkbox" name="sources_europeana" checked>
+     Europeana (Europe, Culture)
+    <br>
+    <input type="checkbox" name="sources_mendeley" checked>
+	 Mendeley (Science, Journals)
+    <br>
+    <input type="checkbox" name="sources_zbw" checked>
+	 ZBW (Economy, Articles)
+    <br>
+    <input type="checkbox" name="sources_kimcollect" checked>
+	 KIMCollect (Swiss, Culture)
+    <br>
+    <input type="checkbox" name="sources_wissenmedia" checked>
+	 Wissenmedia (Articles, Culture)
+    <br>
 </form>
 </body>
 </html>

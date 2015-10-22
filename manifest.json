@@ -31,5 +31,10 @@
   "browser_action": {
     "default_title": "Check EEXCESS Results",      // optional; shown in tooltip
     "default_popup": "popup.html"        // optional
-  }
+  },
+  "permissions": [
+        "tabs",
+        "<all_urls>",
+        "storage"
+    ]
 }

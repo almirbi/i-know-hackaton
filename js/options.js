@@ -1,23 +1,21 @@
 $(function() {
-    $( "#notifications-minimum-slider" ).slider({
-        value: localStorage.notificationsMinimum,
+    $( "#results-maximum-slider" ).slider({
+        value: localStorage.maxResults,
         min: 1,
         max: 100,
         step: 1,
         slide: function( event, ui ) {
-            $( "#notifications-minimum-value" ).val( ui.value).trigger('change');
+            $( "#results-maximum-value" ).val( ui.value).trigger('change');
         }
     });
-    //$( "#notifications-minimum-value" ).val( $( "#notifications-minimum-slider" ).slider( "value" ) );
-
-    $( "#toolbar-minimum-slider" ).slider({
-        value: localStorage.toolbarMinimum,
-        min: 1,
-        max: 100,
-        step: 1,
-        slide: function( event, ui ) {
-            $( "#toolbar-minimum-value" ).val( ui.value ).trigger('change');
-        }
+    $( "#search-history-slider" ).slider({
+    	value: localStorage.searchHistory,
+    	min: 1,
+    	max: 5,
+    	step: 1,
+    	slide: function( event, ui ) {
+    		$( "#search-history-value" ).val( ui.value ).trigger('change');
+    	}
     });
 });
 
@@ -27,13 +25,43 @@ function ghost(isDeactivated) {
 
 }
 
+function contains(a, obj) {
+    var i = a.length;
+    while (i--) {
+       if (a[i] == obj) {
+           return true;
+       }
+    }
+    return false;
+}
+
+function checkSources() {
+	
+	var providers = [];
+    
+    if (options.sources_europeana.checked) providers.push({name: "Europeana"});
+    
+    if (options.sources_mendeley.checked) providers.push({name: "Mendeley"});
+    
+    if (options.sources_zbw.checked) providers.push({name: "ZBW"});
+    
+    if (options.sources_kimcollect.checked) providers.push({name: "KIMPortal"});
+    
+    if (options.sources_wissenmedia.checked) providers.push({name: "Wissenmedia"});
+    
+    localStorage.sources = JSON.stringify(providers);
+    
+}
+
+
 window.addEventListener('load', function() {
 
     options.isActivated.checked = JSON.parse(localStorage.isActivated);
     options.apiKey.value = localStorage.apiKey;
-    options.toolbarMinimum.value = localStorage.toolbarMinimum;
-    options.notificationsMinimum.value = localStorage.notificationsMinimum;
+    options.maxResults.value = localStorage.maxResults;
+    options.searchHistory.value = localStorage.searchHistory;
 
+    
     if (!options.isActivated.checked) { ghost(true); }
 
     options.isActivated.onchange = function() {
@@ -45,15 +73,43 @@ window.addEventListener('load', function() {
         localStorage.apiKey = options.apiKey.value;
     };
 
-    options.toolbarMinimum.onchange = function() {
-        localStorage.toolbarMinimum = options.toolbarMinimum.value;
+    options.maxResults.onchange = function() {
+    	localStorage.maxResults = options.maxResults.value;
     };
 
-    options.notificationsMinimum.onchange = function() {
-        localStorage.notificationsMinimum = options.notificationsMinimum.value;
+    options.searchHistory.onchange = function() {
+        localStorage.searchHistory = options.searchHistory.value;
     };
 
-    options.toolbarOn.onchange = function() {
-        localStorage.toolbarOn = options.toolbarOn.checked;
-    };
+    
+    // TODO: The sources list really shouldn't be static
+    options.sources_europeana.checked = false;
+    options.sources_mendeley.checked = false;
+    options.sources_zbw.checked = false;
+    options.sources_kimcollect.checked = false;
+    options.sources_wissenmedia.checked = false;
+    
+    var providers = JSON.parse(localStorage.sources);
+    
+    if (contains(providers, "Europeana")) {
+    	options.sources_europeana.checked = true;
+    }
+    if (contains(providers, "Mendeley")) {
+    	options.sources_mendeley.checked = true;
+    }
+    if (contains(providers, "ZBW")) {
+    	options.sources_zbw.checked = true;
+    }
+    if (contains(providers, "KIMPortal")) {
+    	options.sources_kimcollect.checked = true;
+    }
+    if (contains(providers, "Wissenmedia")) {
+    	options.sources_wissenmedia.checked = true;
+    }
+    
+    options.sources_europeana.onchange = checkSources();
+    options.sources_mendeley.onchange = checkSources();
+    options.sources_zbw.onchange = checkSources();
+    options.sources_kimcollect.onchange = checkSources();
+    options.sources_wissenmedia.onchange = checkSources();
 });
